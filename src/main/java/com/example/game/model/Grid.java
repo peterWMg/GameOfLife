@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Grid implements Iterable<Cell> {
 
-    private HashMap<Integer, Cell> grid;
-    private LinkedHashMap<Integer, Cell> alives;
-    private int rows;
-    private int columns;
+    private final HashMap<Integer, Cell> grid;
+    private final LinkedHashMap<Integer, Cell> alives;
+    private final int rows;
+    private final int columns;
 
     public Grid(int rows, int columns) {
         this.rows = rows;
