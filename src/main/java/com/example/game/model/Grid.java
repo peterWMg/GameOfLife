@@ -38,10 +38,17 @@ public class Grid implements Iterable<Cell> {
         return alivesCount;
     }
 
+    /**
+     * @return the number of alive cells in the grid
+     */
     public int aliveCount() {
         return alives.size();
     }
 
+    /**
+     * @param cell A cell within the grid
+     * @return A list of alive cells that are neighbours of the given cell in the format {"[1,1],[1,2],[1,3],...,[x,y]"}
+     */
     public String[] getNeighboursString(Cell cell) {
         int row = cell.row;
         int column = cell.column;
@@ -53,24 +60,29 @@ public class Grid implements Iterable<Cell> {
         return arrayList.toArray(new String[0]);
     }
 
-
+    /**
+     *
+     * @param cell A Cell within the grid
+     * @return A list of dead cells that are neighbours of the given cell
+     */
     public List<Cell> getDeadNeighbours(Cell cell) {
-        LinkedList<Cell> nonAliveNeighbours = new LinkedList<>();
+        LinkedList<Cell> deadNeighbours = new LinkedList<>();
         for (String neighbour : getNeighboursString(cell)) {
             //if alive continue, only want dead cells
             if (this.alives.containsKey(neighbour.hashCode())) {
                 continue;
             }
             if (this.grid.containsKey(neighbour.hashCode())) {
-                nonAliveNeighbours.add(this.grid.get(neighbour.hashCode()));
+                deadNeighbours.add(this.grid.get(neighbour.hashCode()));
             } else {
                 Cell newCell = new Cell(neighbour);
-                nonAliveNeighbours.add(newCell);
+                deadNeighbours.add(newCell);
+                // add to grid to avoid having to create again - given time would experiment if this is a good idea
                 grid.put(cell.hashCode(), newCell);
             }
         }
 
-        return nonAliveNeighbours;
+        return deadNeighbours;
     }
 
 
@@ -90,6 +102,10 @@ public class Grid implements Iterable<Cell> {
         return columns;
     }
 
+
+    /**
+     * @return an iterator over the alive cells in the grid
+     */
     @Override
     public Iterator<Cell> iterator() {
         return alives.values().iterator();
