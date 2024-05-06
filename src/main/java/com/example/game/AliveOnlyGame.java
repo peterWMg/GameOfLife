@@ -25,24 +25,21 @@ public class AliveOnlyGame {
     }
 
     public void run(Grid grid) {
-        for (int generation=1; generation <= GENERATIONS && grid.aliveCount() > 0; generation++) {
+        for (int generation = 1; generation <= GENERATIONS && grid.aliveCount() > 0; generation++) {
             grid = nextGeneration(grid);
-            // break if there are no alive cells.  Have to iterate while printing so count at the same time - maybe look for a better way
             printLife(grid, generation);
         }
     }
 
-    // Function to print next generation
     static Grid nextGeneration(Grid grid) {
         Grid future = new Grid(grid.getRows(), grid.getColumns());
         int aliveNeighbours;
         // Loop through every alive cell and adjacent cells
         for (Cell cell : grid) {
             if (!cell.isCalculated()) {
-                aliveNeighbours = grid.aliveNeighboursCount(cell);
-                future.setCell(cell.row, cell.column, liveRule(cell, aliveNeighbours));
+                future.setCell(cell.row, cell.column, liveRule(cell, grid.aliveNeighboursCount(cell)));
             }
-            // add new cell to the grid
+           // Before continuing to the next alive cell check the future status of all uninhabited neighbours
             grid.getDeadNeighbours(cell).stream()
                     .filter(neighbour -> !neighbour.isCalculated())
                     .forEach(neighbour -> {
@@ -61,13 +58,13 @@ public class AliveOnlyGame {
         return cell.isAlive();
     }
 
-    private static void printLife(Grid grid, int current) {
-        StringBuilder buffer = new StringBuilder();
-        buffer.append(current).append(": ");
-        buffer.append(grid.aliveString());
-        if (grid.aliveCount() > 0)
+    private static void printLife(Grid grid, int generation) {
+        if (grid.aliveCount() > 0) {
+            StringBuilder buffer = new StringBuilder();
+            buffer.append(generation).append(": ");
+            buffer.append(grid.aliveString());
             System.out.println(buffer);
-        else {
+        } else {
             System.out.println("[]");
         }
     }
