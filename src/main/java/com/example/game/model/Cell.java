@@ -1,7 +1,5 @@
 package com.example.game.model;
 
-import java.util.LinkedList;
-
 public class Cell {
     private boolean alive;
     public int row;
@@ -19,10 +17,6 @@ public class Cell {
         String[] split = neighbour.split(",");
         this.row = Integer.parseInt(split[0].substring(1));
         this.column = Integer.parseInt(split[1].substring(0, split[1].length() - 1));
-    }
-
-    public void calculate() {
-        this.calculated = true;
     }
 
     public boolean isAlive() {
