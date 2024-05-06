@@ -25,9 +25,7 @@ public class AliveOnlyGame {
     }
 
     public void run(Grid grid) {
-        int generation = 1;
-
-        for (generation=1; generation <= GENERATIONS && grid.aliveCount() > 0; generation++) {
+        for (int generation=1; generation <= GENERATIONS && grid.aliveCount() > 0; generation++) {
             grid = nextGeneration(grid);
             // break if there are no alive cells.  Have to iterate while printing so count at the same time - maybe look for a better way
             printLife(grid, generation);
@@ -37,7 +35,7 @@ public class AliveOnlyGame {
     // Function to print next generation
     static Grid nextGeneration(Grid grid) {
         Grid future = new Grid(grid.getRows(), grid.getColumns());
-        int aliveNeighbours = 0;
+        int aliveNeighbours;
         // Loop through every alive cell and adjacent cells
         for (Cell cell : grid) {
             if (!cell.isCalculated()) {
@@ -63,7 +61,7 @@ public class AliveOnlyGame {
         return cell.isAlive();
     }
 
-    private static int printLife(Grid grid, int current) {
+    private static void printLife(Grid grid, int current) {
         StringBuilder buffer = new StringBuilder();
         buffer.append(current).append(": ");
         buffer.append(grid.aliveString());
@@ -72,6 +70,5 @@ public class AliveOnlyGame {
         else {
             System.out.println("[]");
         }
-        return grid.aliveCount();
     }
 }

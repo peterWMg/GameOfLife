@@ -33,7 +33,7 @@ public class Cell {
 
     public void setCalculated(boolean calculated, int aliveNeighbours) {
         this.calculated = calculated;
-        this.aliveNeighbours = aliveNeighbours;;
+        this.aliveNeighbours = aliveNeighbours;
     }
 
     public String toString() {
