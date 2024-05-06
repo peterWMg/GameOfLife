@@ -5,7 +5,7 @@ and then running the jar file in the target folder with the appropriate input:
     **java -jar game-1.0.0.jar "[[1,1]]"**
 
 # Solution
-The solution uses a LinkedHashMap store just the live cells. The choice of Linked Hash Map
+The solution uses a LinkedHashMap store just the live cells. The choice of LinkedHashMap
 was made as the given example output indicated the order of processing was determined by the
 order of input and a LinkedHashMap facilitates this by returning elements in the order they are
 added.  The Hash part was used to enable quick checking if a cell is alive or dead.
@@ -20,7 +20,7 @@ adds them to the next generation if alive.</li>
 </ol>
 
 In a real application I would put more helpful return information instead of throwing the IllegalArgumentException.
-The only check was when the first input was included as an example of how this would be handled.
+The only check was when the first input was omitted as an example of how this would be handled.
 
 I have included some basic application tests.  They are not comprehensive and are not unit testing using 
 mocked objects but the addition of such tests to test the logic paths in real application would be expected.
