@@ -1,7 +1,7 @@
 # Running the Game
-The Game of Life can be executed packaging with:  
+The Game of Life can be built using the maven command:  
     **mvn clean package**  
-and then running the jar file with the appropriate input:  
+and then running the jar file in the target folder with the appropriate input:  
     **java -jar game-1.0.0.jar "[[1,1]]"**
 
 # Solution

@@ -5,7 +5,7 @@ import com.example.game.model.Grid;
 public class GridGenerator {
 
     public static Grid generateGrid(String alives, int rows, int columns) {
-        String news = alives.replaceAll("\\]\\[", ",");
+        String news = alives.replaceAll("]\\[", ",");
         news = news.replaceAll("[\\[\\]]", "");
         String[] splitValues = news.trim().split(",");
 
